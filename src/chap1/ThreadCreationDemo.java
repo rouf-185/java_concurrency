@@ -7,8 +7,8 @@ public class ThreadCreationDemo {
 			public void run() {
 				System.out.println("Current Thread Name: " + Thread.currentThread().getName());
 			}
-		}, "Thread-4");
-		Thread t4 = new Thread(() -> System.out.println("Current Thread Name: " + Thread.currentThread().getName()));
+		}, "Thread-3");
+		Thread t4 = new Thread(() -> System.out.println("Current Thread Name: " + Thread.currentThread().getName()), "Thread-4");
 		t1.start();
 		t2.start();
 		t3.start();
