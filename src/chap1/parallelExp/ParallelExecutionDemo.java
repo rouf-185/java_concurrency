@@ -22,7 +22,8 @@ public class ParallelExecutionDemo {
             System.out.println("Simulating sequential Execution");
             Credit creditScore1 = measure(() -> creditCalculatorService.calculateCreditScoreSequential(1L), "Sequential");
             Credit creditScore2 = measure(() -> creditCalculatorService.calculateCreditScoreParallel(1L),  "Parallel");
-            System.out.println(creditScore1.score() + " " + creditScore2.score());
+            Credit creditScore3 = measure(() -> creditCalculatorService.calculateCreditScoreUsingExecutor(1L),  "ExecutorService");
+            System.out.println(creditScore1.score() + " " + creditScore2.score() + " " + creditScore3.score());
         } catch(Exception ex) {
             ex.printStackTrace();
         }

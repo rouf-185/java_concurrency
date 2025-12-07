@@ -47,6 +47,17 @@ public class CreditCalculatorService {
         importantWork();
         return calculateCreditScore(person, assets, liabilities);
     }
+    public Credit calculateCreditScoreUsingExecutor(Long personId) throws ExecutionException, InterruptedException {
+        Person person = getPerson(personId);
+        try(ExecutorService executor = Executors.newFixedThreadPool(5)) {
+            Future<List<Asset>> assetsFuture = executor.submit(() -> getAssets(person));
+            Future<List<Liability>> liabilitiesFuture = executor.submit(() -> getLiabilities(person));
+            executor.submit(() -> importantWork());
+            List<Asset> assets = assetsFuture.get();
+            List<Liability> liabilities = liabilitiesFuture.get();
+            return calculateCreditScore(person, assets, liabilities);
+        }
+    }
     public Credit calculateCreditScoreParallel(Long personId) throws Exception {
         var person = getPerson(personId);
         var assetsRef = new AtomicReference<List<Asset>>();
