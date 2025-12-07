@@ -40,7 +40,7 @@ public class CreditCalculatorService {
         double score = (assetValue - liabilityAmount) / 1000; // Simplified scoring logic
         return new Credit(score);  
     }   
-    public Credit calculateCreditScore(Long personId) throws Exception {
+    public Credit calculateCreditScoreSequential(Long personId) throws Exception {
         var person = getPerson(personId);
         var assets = getAssets(person);
         var liabilities = getLiabilities(person); 
